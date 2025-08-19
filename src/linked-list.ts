@@ -54,7 +54,7 @@ class LinkedList<T> {
     }
   }
 
-  public appendFirst(value: T): LinkedListNode<T> {
+  public prepend(value: T): LinkedListNode<T> {
     const newNode = new LinkedListNode<T>(value);
     if (this.length === 0) {
       this.append(value);
@@ -72,7 +72,7 @@ class LinkedList<T> {
       return undefined;
     }
     if (position === 0) {
-      return this.appendFirst(value);
+      return this.prepend(value);
     }
     const newNode = new LinkedListNode<T>(value);
 
@@ -126,11 +126,35 @@ class LinkedList<T> {
     return curNode;
   }
 
+  public pop(): LinkedListNode<T> {
+    if (this.length === 0) {
+      return undefined;
+    } else if (this.length === 1) {
+      const tempNode = this.head;
+      this.head = undefined;
+      this.tail = undefined;
+      this.length = 0;
+      return tempNode;
+    }
+    let curNode = this.head;
+    let prevNode = this.head;
+    while (curNode.next) {
+      prevNode = curNode;
+      curNode = curNode.next;
+    }
+
+    prevNode.next = undefined;
+    this.length--;
+    return curNode;
+  }
+
+  // TODO:
   public remove(position: number): LinkedListNode<T> {
 
     return undefined;
   }
 
+  // TODO:
   public reverse(): LinkedList<T> {
 
     return undefined;
@@ -147,7 +171,7 @@ class LinkedList<T> {
   });
 
   [0, -10, -20, -30].forEach((numToAdd) => {
-    console.log(`New node prepended: ${numLinkedList.appendFirst(numToAdd).value}`);
+    console.log(`New node prepended: ${numLinkedList.prepend(numToAdd).value}`);
   });
 
   numLinkedList.insert(7, 3.5);
@@ -156,6 +180,13 @@ class LinkedList<T> {
 
   console.log(`Value at position 7 is: ${numLinkedList.getValue(7)}`);
   console.log(`New Value at position 7 is: ${numLinkedList.setValue(7, 3.3876).value}`);
+  console.log(`Length before pop: ${numLinkedList.length}
+    Popped value: ${numLinkedList.pop().value}
+    Length after pop: ${numLinkedList.length}`);
+
+  console.log(`Length before pop: ${numLinkedList.length}
+    Popped value: ${numLinkedList.pop().value}
+    Length after pop: ${numLinkedList.length}`);
 
   const strLinkedList = new LinkedList<string>('Puma');
 
@@ -164,7 +195,7 @@ class LinkedList<T> {
   });
 
   ['Adidas', 'New Balance'].forEach((strToAdd) => {
-    console.log(`New node prepended: ${strLinkedList.appendFirst(strToAdd).value}`);
+    console.log(`New node prepended: ${strLinkedList.prepend(strToAdd).value}`);
   });
   strLinkedList.print();
 })();
