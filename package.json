@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "test": "tsc && node --test dist/doubly-linked-list.test.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^26.6.5",
     "typescript": "^5.9.2"
-  }
+  },
+  "type": "module"
 }
