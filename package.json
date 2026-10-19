@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsc",
     "watch": "tsc --watch",
-    "test": "tsc && node --test dist/doubly-linked-list.test.js"
+    "test": "tsc && node --test dist/doubly-linked-list.test.js dist/stack.test.js"
   },
   "author": "",
   "license": "ISC",
